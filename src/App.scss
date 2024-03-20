@@ -60,9 +60,33 @@ body {
 
   .search_results__dropdown__item {
     padding: 5px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .result_card {
-  background-color: #e6235c;
+  border-radius: $borderRadius;
+  border: 1px solid white;
+  h1 {
+    color: white;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    padding: 5px 20px;
+  }
+  p {
+    color: white;
+    margin: 0;
+    padding: 5px 20px;
+  }
+}
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
 }

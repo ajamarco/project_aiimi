@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import SearchResults from "./SearchResults";
 import { getPersons } from "../api/persons";
 
-const SearchForm = () => {
+interface personInterface {
+  Email: string;
+  FirstName: string;
+  JobTitle: string;
+  LastName: string;
+  Phone: string;
+  id: string;
+}
+
+const SearchForm = (props: any) => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
 
@@ -10,7 +19,6 @@ const SearchForm = () => {
     if (search.length > 1) {
       const fetchData = async () => {
         const response = await getPersons(search);
-
         setData(response);
       };
 
@@ -39,6 +47,11 @@ const SearchForm = () => {
     e.preventDefault();
   };
 
+  const handleResultClick = (person: personInterface) => {
+    props.handleAddNewCard(person);
+    setSearch("");
+  };
+
   return (
     <>
       <form className="search_form" onSubmit={handleSubmit}>
@@ -51,8 +64,9 @@ const SearchForm = () => {
         <button type="submit">Go!</button>
       </form>
       <SearchResults
-        showResults={search.length > 1 ? true : false}
+        showResults={data.length > 0 && search.length > 2}
         data={data}
+        handleResultClick={handleResultClick}
       />
     </>
   );

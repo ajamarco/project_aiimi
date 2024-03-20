@@ -1,15 +1,27 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
 import SearchForm from "./components/SearchForm";
-import SearchResults from "./components/SearchResults";
 import Results from "./components/Results";
+import { useState } from "react";
+
+interface personInterface {
+  Email: string;
+  FirstName: string;
+  JobTitle: string;
+  LastName: string;
+  Phone: string;
+  id: string;
+}
 
 function App() {
+  const [data, setData] = useState<personInterface[]>([]);
+  const addNewCard = (person: personInterface): void => {
+    setData([...data, person]);
+  };
+
   return (
     <div className="app">
-      <SearchForm />
-      <Results />
+      <SearchForm handleAddNewCard={addNewCard} />
+      <Results data={data} />
     </div>
   );
 }
