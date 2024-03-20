@@ -1,0 +1,41 @@
+$backgroundColor: #1a1a1a;
+$primaryColor: #e6235c;
+$borderRadius: 15px;
+
+body {
+  background-color: $backgroundColor;
+}
+
+.app {
+  display: grid;
+  padding: 100px 200px 0 200px;
+}
+
+.search_form {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+
+  input {
+    border: none;
+    height: 40px;
+    //make the left border radius of the input field round
+    border-top-left-radius: $borderRadius;
+    border-bottom-left-radius: $borderRadius;
+    padding: 0 10px;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    //make the right border radius of the button round
+    border-top-right-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+    background-color: $primaryColor;
+    border: 1px solid #f1f1f1;
+    color: white;
+  }
+}
