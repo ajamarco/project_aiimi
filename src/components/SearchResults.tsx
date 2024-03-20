@@ -1,4 +1,10 @@
-const SearchResults = ({ showResults }: { showResults: boolean }) => {
+interface SearchResultsProps {
+  showResults: boolean;
+  data: any[];
+}
+
+const SearchResults = ({ showResults, data }: SearchResultsProps) => {
+  console.log("the data is ", data);
   return (
     <div className="search_results">
       <div
@@ -8,9 +14,13 @@ const SearchResults = ({ showResults }: { showResults: boolean }) => {
             : "search_results__dropdown"
         }
       >
-        <div className="search_results__dropdown__item">Result 1</div>
-        <div className="search_results__dropdown__item">Result 2</div>
-        <div className="search_results__dropdown__item">Result 3</div>
+        {data.map((person) => {
+          return (
+            <div className="search_results__dropdown__item">
+              {person.FirstName} {person.LastName}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
