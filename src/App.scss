@@ -14,6 +14,7 @@ body {
 .search_form {
   display: grid;
   grid-template-columns: 9fr 1fr;
+  position: relative;
 
   input {
     border: none;
@@ -22,6 +23,8 @@ body {
     border-top-left-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
     padding: 0 10px;
+
+    //remove the default outline of the input field
     &:focus-visible {
       outline: none;
     }
@@ -31,11 +34,35 @@ body {
     border: none;
     background-color: #f1f1f1;
     cursor: pointer;
-    //make the right border radius of the button round
     border-top-right-radius: $borderRadius;
     border-bottom-right-radius: $borderRadius;
     background-color: $primaryColor;
     border: 1px solid #f1f1f1;
     color: white;
   }
+}
+
+.search_results {
+  background-color: #f1f1f1;
+  position: relative;
+  .search_results__dropdown {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    display: none;
+    margin-top: 5px;
+    border-radius: $borderRadius;
+    padding: 7px 0;
+  }
+  .search_results__dropdown--show {
+    display: block;
+  }
+
+  .search_results__dropdown__item {
+    padding: 5px;
+  }
+}
+
+.result_card {
+  background-color: #e6235c;
 }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: auto; /* Or specify your rows as needed */
+        grid-template-columns: auto; /* Or specify your columns as needed */
+        /* Other grid container styles */
+        position: relative;
+      }
+
+      .input {
+        grid-row: 1;
+        grid-column: 1;
+        width: 100%;
+      }
+
+      .dropdown-container {
+        grid-row: 2;
+        grid-column: 1;
+        position: relative;
+      }
+
+      .dropdown {
+        position: absolute;
+        width: 100%;
+        display: none;
+        /* Other dropdown styles */
+        background-color: teal;
+      }
+
+      .dropdown ul {
+        list-style-type: none;
+        background-color: white;
+        border: 1px solid black;
+        /* Other dropdown list styles */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input
+        type="text"
+        id="inputField"
+        class="input"
+        placeholder="Enter text..."
+      />
+      <div class="dropdown-container">
+        <div class="dropdown">
+          <!-- Dropdown content here -->
+          <ul>
+            <li>Dropdown Item 1</li>
+            <li>Dropdown Item 2</li>
+            <li>Dropdown Item 3</li>
+          </ul>
+        </div>
+      </div>
+      <div>dsdasdsa</div>
+      <div>dsdasdsa</div>
+      <div>dsdasdsa</div>
+      <div>dsdasdsa</div>
+      <div>dsdasdsa</div>
+      <div>dsdasdsa</div>
+    </div>
+
+    <script>
+      const inputField = document.getElementById("inputField");
+      const dropdown = document.querySelector(".dropdown");
+
+      //create an event listener for the input field
+      inputField.addEventListener("input", (e) => {
+        //if e.target contains more than 5 chars, show the dropdown
+        if (e.target.value.length > 5) {
+          dropdown.style.display = "block";
+        } else {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
