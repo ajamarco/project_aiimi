@@ -70,7 +70,9 @@
             setTimeout(function () {
               errorNotification.style.display = "none";
               errorNotification.style.animation = "";
+              console.log("after 500 ms");
             }, 500); // Wait for the animation to finish (0.5s)
+            console.log("after 3000 ms");
           }, 3000); // Auto-close after 3 seconds
         });
     </script>

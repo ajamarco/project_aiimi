@@ -1,4 +1,12 @@
+import { useContext } from "react";
+import { dataContext } from "../providers/Context";
+
 const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
+  const context = useContext(dataContext);
+
+  if (!context)
+    throw new Error("useContext must be used within a Provider with a value");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     //get the values of the form
@@ -13,6 +21,27 @@ const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
       document.getElementById("phone_number") as HTMLInputElement
     ).value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
+
+    //check if any of the fields are empty. if it is, show an alert
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      jobTitle === "" ||
+      phoneNumber === "" ||
+      email === ""
+    ) {
+      context.setAlertText("Please fill in all fields");
+      context.setShowAlert(true);
+      return;
+    }
+
+    //check if email is valid
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      context.setAlertText("Please enter a valid email");
+      context.setShowAlert(true);
+      return;
+    }
 
     //create a new user object
     const newUser = {

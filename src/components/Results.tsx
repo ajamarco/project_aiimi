@@ -1,5 +1,6 @@
 import React from "react";
 import ResultCard from "./ResultCard";
+import { useContext } from "react";
 
 interface personInterface {
   Email: string;
@@ -10,19 +11,9 @@ interface personInterface {
   id: string;
 }
 
-/*data example
-[
-    {
-        "id": "5",
-        "FirstName": "Gavin",
-        "LastName": "Miles",
-        "JobTitle": "UX Designer",
-        "Phone": "07881 987554",
-        "Email": "gmiles@test.com"
-    }
-] */
-
 const Results = (data: any) => {
+  const contextData = useContext(data);
+  console.log("the context data is ", contextData);
   console.log("the data is ", data.data);
   return (
     <div className="results">

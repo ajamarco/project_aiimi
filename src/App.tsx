@@ -1,9 +1,12 @@
 import "./App.scss";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import CreateNew from "./components/CreateNew";
 import Alert from "./components/Alert";
+
+import { dataContext } from "./providers/Context";
+import Test from "./components/test";
 
 interface personInterface {
   Email: string;
@@ -15,20 +18,32 @@ interface personInterface {
 }
 
 function App() {
-  const [data, setData] = useState<personInterface[]>([]);
+  const [userData, setUserData] = useState<personInterface[]>([]);
   const addNewCard = (person: personInterface): void => {
-    setData([...data, person]);
+    setUserData([...userData, person]);
   };
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertText, setAlertText] = useState("Error");
+
   return (
-    <>
+    <dataContext.Provider
+      value={{
+        showAlert,
+        setShowAlert,
+        alertText,
+        setAlertText,
+        userData,
+        setUserData,
+      }}
+    >
       <div className="app">
         <SearchForm handleAddNewCard={addNewCard} />
-        <Results data={data} />
+        <Results data={userData} />
       </div>
       <CreateNew />
       <Alert />
-    </>
+    </dataContext.Provider>
   );
 }
 
