@@ -62,7 +62,7 @@ const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("New user added:", data);
+        context.setUserData([...context.userData, data]);
         //clear the form
         (document.getElementById("first_name") as HTMLInputElement).value = "";
         (document.getElementById("last_name") as HTMLInputElement).value = "";

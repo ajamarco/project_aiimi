@@ -39,7 +39,7 @@ function App() {
     >
       <div className="app">
         <SearchForm handleAddNewCard={addNewCard} />
-        <Results data={userData} />
+        <Results />
       </div>
       <CreateNew />
       <Alert />
