@@ -3,6 +3,7 @@ import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { useState } from "react";
 import CreateNew from "./components/CreateNew";
+import Alert from "./components/Alert";
 
 interface personInterface {
   Email: string;
@@ -26,6 +27,7 @@ function App() {
         <Results data={data} />
       </div>
       <CreateNew />
+      <Alert />
     </>
   );
 }

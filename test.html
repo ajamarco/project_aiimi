@@ -3,194 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Error Notification</title>
     <style>
-      body {
-        background-color: #1a1a1a;
-      }
-      .app {
-        display: grid;
-        padding: 100px 200px 0 200px;
-      }
-      .search_form {
-        display: grid;
-        grid-template-columns: 9fr 1fr;
-        position: relative;
-      }
-      .search_form input {
-        border: none;
-        height: 40px;
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
-        padding: 0 10px;
-      }
-      .search_form input:focus-visible {
-        outline: none;
-      }
-      .search_form button {
-        border: none;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
-        background-color: #e6235c;
-        border: 1px solid #f1f1f1;
-        color: white;
-      }
-      .search_results {
-        background-color: #f1f1f1;
-        position: relative;
-      }
-      .search_results .search_results__dropdown {
-        background-color: white;
-        position: absolute;
-        width: 100%;
+      #errorNotification {
         display: none;
-        margin-top: 5px;
-        border-radius: 15px;
-        padding: 7px 0;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f44336;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        animation: slideInRight 0.5s ease forwards;
       }
-      .search_results .search_results__dropdown--show {
-        display: block;
+
+      @keyframes slideInRight {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
       }
-      .search_results .search_results__dropdown__item {
-        padding: 5px;
+
+      @keyframes slideOutRight {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      #errorNotification p {
+        margin: 0;
+      }
+
+      #errorNotification .close {
+        position: absolute;
+        top: 5px;
+        right: 10px;
         cursor: pointer;
       }
-      .search_results .search_results__dropdown__item:hover {
-        text-decoration: underline;
-      }
-      .result_card {
-        border-radius: 15px;
-        border: 1px solid white;
-      }
-      .result_card h1 {
-        color: white;
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-        padding: 5px 20px;
-      }
-      .result_card p {
-        color: white;
-        margin: 0;
-        padding: 5px 20px;
-      }
-      .results {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        margin-top: 10px;
-      }
-      .create_new {
-        position: absolute;
-        bottom: 0;
-        display: grid;
-        grid-template-columns: 50%;
-        justify-content: center;
-        width: 100%;
-      }
-      .create_new_form {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-      }
-      .create_new_form .create_new_form__names {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .create_new_form .create_new_form__info {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Adjusted to use "fr" unit */
-        gap: 20px; /* Increased gap to provide more space */
-      }
 
-      .create_new_button {
-        display: grid;
-        grid-template-columns: 100px;
-        justify-content: center;
-      }
-
-      .create_new_form__info input {
-        padding: 0;
-        box-sizing: border-box;
-        width: 100px;
+      #errorNotification .close:hover {
+        color: #ccc;
       }
     </style>
   </head>
   <body>
-    <body data-new-gr-c-s-check-loaded="14.1162.0" data-gr-ext-installed="">
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root">
-        <div class="app">
-          <form class="search_form">
-            <input
-              type="text"
-              placeholder="Search for a user..."
-              value=""
-            /><button type="submit">Go!</button>
-          </form>
-          <div class="search_results">
-            <div class="search_results__dropdown">
-              <div class="search_results__dropdown__item">David Jones</div>
-              <div class="search_results__dropdown__item">Lisa Holmes</div>
-              <div class="search_results__dropdown__item">Alex Smith</div>
-              <div class="search_results__dropdown__item">Kieran James</div>
-              <div class="search_results__dropdown__item">Gavin Miles</div>
-              <div class="search_results__dropdown__item">Kathy Smith</div>
-              <div class="search_results__dropdown__item">Phil Walker</div>
-              <div class="search_results__dropdown__item">Rebecca Bates</div>
-              <div class="search_results__dropdown__item">
-                Hayley Walker-Smith
-              </div>
-              <div class="search_results__dropdown__item">Alexis Crawley</div>
-              <div class="search_results__dropdown__item">David Gold</div>
-              <div class="search_results__dropdown__item">Phillipa Walker</div>
-            </div>
-          </div>
-          <div class="results"></div>
-        </div>
-        <div class="create_new">
-          <form class="create_new_form">
-            <div class="create_new_form__names">
-              <input
-                type="text"
-                name="first_name"
-                id="first_name"
-                placeholder="First Name"
-              /><input
-                type="text"
-                name="last_name"
-                id="last_name"
-                placeholder="Last Name"
-              />
-            </div>
-            <div class="create_new_form__info">
-              <input
-                type="text"
-                name="job_title"
-                id="job_title"
-                placeholder="Job Title"
-              /><input
-                type="number"
-                name="phone_number"
-                id="phone_number"
-                placeholder="Phone Number"
-              /><input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-              />
-            </div>
-            <div class="create_new_form__button"></div>
-          </form>
-          <div class="create_new_button">
-            <button class="create_new_button__button">New User +</button>
-          </div>
-        </div>
-      </div>
-    </body>
+    <button id="showNotification">Show Error Notification</button>
+    <div id="errorNotification">
+      <p>There was an error!</p>
+    </div>
+    <script>
+      document
+        .getElementById("showNotification")
+        .addEventListener("click", function () {
+          var errorNotification = document.getElementById("errorNotification");
+          errorNotification.style.display = "block";
+          setTimeout(function () {
+            errorNotification.style.animation =
+              "slideOutRight 0.5s ease forwards";
+            setTimeout(function () {
+              errorNotification.style.display = "none";
+              errorNotification.style.animation = "";
+            }, 500); // Wait for the animation to finish (0.5s)
+          }, 3000); // Auto-close after 3 seconds
+        });
+    </script>
   </body>
 </html>
