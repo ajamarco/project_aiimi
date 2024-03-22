@@ -87,14 +87,6 @@
       "JobTitle": "DevOps Engineer",
       "Phone": "07768 479563",
       "Email": "dgold@test.com"
-    },
-    {
-      "id": "12",
-      "FirstName": "Phillipa",
-      "LastName": "Walker",
-      "JobTitle": "QA Lead",
-      "Phone": "07775 357951",
-      "Email": "pwalker2@test.com"
     }
   ]
 }

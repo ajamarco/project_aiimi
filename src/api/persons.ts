@@ -12,3 +12,21 @@ export const getPersons = async (searchValue: string | undefined) => {
     return filteredData;
   } else return data;
 };
+
+export const createPerson = async (newPerson: {
+  FirstName: string;
+  LastName: string;
+  JobTitle: string;
+  Phone: string;
+  Email: string;
+}) => {
+  const response = await fetch("http://localhost:5000/persons", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newPerson),
+  });
+  const data = await response.json();
+  return data;
+};

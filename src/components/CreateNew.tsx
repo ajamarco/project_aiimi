@@ -7,8 +7,6 @@ import { dataContext } from "../providers/Context";
 const CreateNew = () => {
   // Accessing data context
   const data = useContext(dataContext);
-  // Logging data for debugging purposes
-  console.log("checking data from creatednew", data);
   // State to manage whether the form is shown or not
   const [showForm, setShowForm] = useState(false);
 

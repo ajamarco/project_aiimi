@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { dataContext } from "../providers/Context";
 
+import { createPerson } from "../api/persons";
+
 // CreateNewForm component to handle the creation of new user form
 const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
   // Accessing data context
@@ -47,6 +49,14 @@ const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
       return;
     }
 
+    // Check if phone number is valid using regex
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      context.setAlertText("Please enter a valid phone number");
+      context.setShowAlert(true);
+      return;
+    }
+
     // Create a new user object
     const newUser = {
       FirstName: firstName,
@@ -57,26 +67,16 @@ const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
     };
 
     // Send the new user object to the backend
-    fetch("http://localhost:5000/persons", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // Update user data in context
-        context.setUserData([...context.userData, data]);
-        // Clear the form fields
-        (document.getElementById("first_name") as HTMLInputElement).value = "";
-        (document.getElementById("last_name") as HTMLInputElement).value = "";
-        (document.getElementById("job_title") as HTMLInputElement).value = "";
-        (document.getElementById("phone_number") as HTMLInputElement).value =
-          "";
-        (document.getElementById("email") as HTMLInputElement).value = "";
-      })
-      .catch((err) => console.log(err));
+    createPerson(newUser).then((data) => {
+      // Update user data in context
+      context.setUserData([...context.userData, data]);
+      // Clear the form fields
+      (document.getElementById("first_name") as HTMLInputElement).value = "";
+      (document.getElementById("last_name") as HTMLInputElement).value = "";
+      (document.getElementById("job_title") as HTMLInputElement).value = "";
+      (document.getElementById("phone_number") as HTMLInputElement).value = "";
+      (document.getElementById("email") as HTMLInputElement).value = "";
+    });
   };
 
   // Rendering the form component
