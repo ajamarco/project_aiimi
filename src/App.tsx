@@ -2,6 +2,7 @@ import "./App.scss";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
 import { useState } from "react";
+import CreateNew from "./components/CreateNew";
 
 interface personInterface {
   Email: string;
@@ -19,10 +20,13 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <SearchForm handleAddNewCard={addNewCard} />
-      <Results data={data} />
-    </div>
+    <>
+      <div className="app">
+        <SearchForm handleAddNewCard={addNewCard} />
+        <Results data={data} />
+      </div>
+      <CreateNew />
+    </>
   );
 }
 
