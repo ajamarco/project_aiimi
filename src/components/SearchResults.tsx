@@ -1,21 +1,26 @@
+import { useContext } from "react";
+import { dataContext } from "../providers/Context";
+
 interface SearchResultsProps {
   showResults: boolean;
   data: any[];
-  handleResultClick: (person: any) => void;
 }
 
 // SearchResults component to display search results dropdown
-const SearchResults = ({
-  showResults,
-  data,
-  handleResultClick,
-}: SearchResultsProps) => {
+const SearchResults = ({ showResults, data }: SearchResultsProps) => {
+  // Accessing data context
+  const context = useContext(dataContext);
+
+  // Throw an error if context is not available
+  if (!context)
+    throw new Error("useContext must be used within a Provider with a value");
+
   // Function to handle clicking on a search result item
   const handleClick = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
     // Get the person where id matches the id of the person clicked
     const person = data.find((person) => person.id === id);
-    // Call handleResultClick function with the selected person
-    handleResultClick(person);
+    // add person to the user data
+    context.setUserData([...context.userData, person]);
   };
 
   // Rendering the search results dropdown

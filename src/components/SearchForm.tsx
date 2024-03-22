@@ -2,16 +2,6 @@ import React, { useState, useEffect } from "react";
 import SearchResults from "./SearchResults";
 import { getPersons } from "../api/persons";
 
-// Interface defining the structure of a person object
-interface personInterface {
-  Email: string;
-  FirstName: string;
-  JobTitle: string;
-  LastName: string;
-  Phone: string;
-  id: string;
-}
-
 // SearchForm component to handle searching for users
 const SearchForm = (props: any) => {
   // State to manage the search input value
@@ -54,14 +44,6 @@ const SearchForm = (props: any) => {
     // Do nothing on form submission for now, since the results show up as you type
   };
 
-  // Handler function to handle clicking on a search result
-  const handleResultClick = (person: personInterface) => {
-    // Call handleAddNewCard function from props to add a new card
-    props.handleAddNewCard(person);
-    // Clear the search input field after clicking a result
-    setSearch("");
-  };
-
   // Rendering the search form and search results
   return (
     <>
@@ -77,7 +59,6 @@ const SearchForm = (props: any) => {
       <SearchResults
         showResults={data.length > 0 && search.length > 2}
         data={data}
-        handleResultClick={handleResultClick}
       />
     </>
   );

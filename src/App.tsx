@@ -21,10 +21,6 @@ interface personInterface {
 function App() {
   // State to manage user data
   const [userData, setUserData] = useState<personInterface[]>([]);
-  // Function to add a new card
-  const addNewCard = (person: personInterface): void => {
-    setUserData([...userData, person]);
-  };
 
   // State to manage alert visibility
   const [showAlert, setShowAlert] = useState(false);
@@ -45,7 +41,7 @@ function App() {
     >
       <div className="app">
         {/* Search form component */}
-        <SearchForm handleAddNewCard={addNewCard} />
+        <SearchForm />
         {/* Results component */}
         <Results />
       </div>
