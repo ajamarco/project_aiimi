@@ -140,4 +140,23 @@ body {
 .create_new_form__button {
   display: grid;
   justify-content: center;
+  button {
+    border: none;
+    background-color: $primaryColor;
+    color: white;
+    cursor: pointer;
+    border-radius: $borderRadius;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.create_new_button__button {
+  border: none;
+  background-color: $primaryColor;
+  color: white;
+  cursor: pointer;
+  border-radius: $borderRadius;
+  padding: 10px;
+  margin-bottom: 10px;
 }

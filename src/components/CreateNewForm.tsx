@@ -1,6 +1,55 @@
 const CreateNewForm = ({ showForm }: { showForm: boolean }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    //get the values of the form
+    const firstName = (
+      document.getElementById("first_name") as HTMLInputElement
+    ).value;
+    const lastName = (document.getElementById("last_name") as HTMLInputElement)
+      .value;
+    const jobTitle = (document.getElementById("job_title") as HTMLInputElement)
+      .value;
+    const phoneNumber = (
+      document.getElementById("phone_number") as HTMLInputElement
+    ).value;
+    const email = (document.getElementById("email") as HTMLInputElement).value;
+
+    //create a new user object
+    const newUser = {
+      FirstName: firstName,
+      LastName: lastName,
+      JobTitle: jobTitle,
+      Phone: phoneNumber,
+      Email: email,
+    };
+
+    //send the new user object to the backend
+    fetch("http://localhost:5000/persons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("New user added:", data);
+        //clear the form
+        (document.getElementById("first_name") as HTMLInputElement).value = "";
+        (document.getElementById("last_name") as HTMLInputElement).value = "";
+        (document.getElementById("job_title") as HTMLInputElement).value = "";
+        (document.getElementById("phone_number") as HTMLInputElement).value =
+          "";
+        (document.getElementById("email") as HTMLInputElement).value = "";
+      })
+      .catch((err) => console.log(err));
+  };
   return (
-    <form className="create_new_form">
+    <form
+      className="create_new_form"
+      style={{ display: showForm ? "grid" : "none" }}
+      onSubmit={(e) => handleSubmit(e)}
+    >
       <div className="create_new_form__names">
         <input
           type="text"

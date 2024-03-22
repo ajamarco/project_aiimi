@@ -1,9 +1,18 @@
-import React from "react";
+const CreateNewButton = ({
+  setShowFormHandler,
+}: {
+  setShowFormHandler: () => void;
+}) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowFormHandler();
+  };
 
-const CreateNewButton = () => {
   return (
     <div className="create_new_button">
-      <button className="create_new_button__button">New User + </button>
+      <button className="create_new_button__button" onClick={handleClick}>
+        New User +{" "}
+      </button>
     </div>
   );
 };
