@@ -4,17 +4,21 @@ interface SearchResultsProps {
   handleResultClick: (person: any) => void;
 }
 
+// SearchResults component to display search results dropdown
 const SearchResults = ({
   showResults,
   data,
   handleResultClick,
 }: SearchResultsProps) => {
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>, id: number) => {
-    //get the person where id matches the id of the person clicked
+  // Function to handle clicking on a search result item
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+    // Get the person where id matches the id of the person clicked
     const person = data.find((person) => person.id === id);
-    //log the person to the console
+    // Call handleResultClick function with the selected person
     handleResultClick(person);
   };
+
+  // Rendering the search results dropdown
   return (
     <div className="search_results">
       <div

@@ -1,13 +1,13 @@
 import "./App.scss";
 import SearchForm from "./components/SearchForm";
 import Results from "./components/Results";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import CreateNew from "./components/CreateNew";
 import Alert from "./components/Alert";
 
 import { dataContext } from "./providers/Context";
-import Test from "./components/test";
 
+// Interface defining the structure of a person object
 interface personInterface {
   Email: string;
   FirstName: string;
@@ -17,15 +17,21 @@ interface personInterface {
   id: string;
 }
 
+// App component serving as the root component of the application
 function App() {
+  // State to manage user data
   const [userData, setUserData] = useState<personInterface[]>([]);
+  // Function to add a new card
   const addNewCard = (person: personInterface): void => {
     setUserData([...userData, person]);
   };
 
+  // State to manage alert visibility
   const [showAlert, setShowAlert] = useState(false);
+  // State to manage alert text
   const [alertText, setAlertText] = useState("Error");
 
+  // Rendering the app with context provider
   return (
     <dataContext.Provider
       value={{
@@ -38,10 +44,14 @@ function App() {
       }}
     >
       <div className="app">
+        {/* Search form component */}
         <SearchForm handleAddNewCard={addNewCard} />
+        {/* Results component */}
         <Results />
       </div>
+      {/* Create new component */}
       <CreateNew />
+      {/* Alert component */}
       <Alert />
     </dataContext.Provider>
   );

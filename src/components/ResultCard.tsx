@@ -1,3 +1,4 @@
+// Interface defining the structure of a person object
 interface personInterface {
   Email: string;
   FirstName: string;
@@ -7,8 +8,12 @@ interface personInterface {
   id: string;
 }
 
+// ResultCard component to display details of a person
 const ResultCard = ({ person }: { person: personInterface }) => {
+  // Logging the person object for debugging purposes
   console.log("the person is ", person);
+
+  // Rendering the result card with person details
   return (
     <div className="result_card">
       <h1>
